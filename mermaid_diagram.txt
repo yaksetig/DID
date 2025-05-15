@@ -9,18 +9,27 @@ flowchart TD
   end
 
   subgraph PoH["Proof of Humanity"]
-    WORLD["World ID<br>(biometric)"]
+    World["World ID<br>(biometric)"]
     Billions["Billions Network<br>(passport)"]
-    Civic["Civic Pass"]
+    Kleros["Proof-of-Humanity"]
+    CIVIC["Civic Pass"]
     Idena["Idena"]
   end
 
   subgraph KYC_Providers["KYC Providers"]
     zkKYC["zkKYC"]
     Synaps["Synaps<br>(KYC)"]
+    CivicKYC["Civic<br(KYC)"]
+  end
+
+   subgraph DID_Ecosystems["DID Ecosystems"]
+    OntoApp["Onto App"]
+    WorldApp["World App"]
+    PrivadoID["PrivadoID"]
   end
 
   subgraph Key_Generation["Key Generation"]
+    Mnemonic["Mnemonic<br>(12/24 words)"]
     Magic["Magic.link<br>(email / login wallet)"]
     zkLogin["zkLogin<br>(Sui OAuth-ZK wallet)"]
     Web3Auth["Web3Auth"]
@@ -54,9 +63,9 @@ subgraph Social_IDs["Social Identifiers"]
   end
 
   subgraph Bio_IDs["Biometric Identifiers"]
+    Fingerprints["Fingers<br>(Touch ID)"]
     Face["Face<br>(Face ID)"]
     Iris["Eyes<br>(Iris Codes)"]
-    Fingerprints["Fingers<br>(Touch ID)"]
   end
 
   subgraph Wallet_Providers["Wallet Providers"]
@@ -65,9 +74,10 @@ subgraph Social_IDs["Social Identifiers"]
     TrustWallet["Trust Wallet"]
   end
 
-  Social(("Social Apps"))
+  Social(("Social Apps<br>(username & password)"))
 
   %% ─────── Relationships ───────
+  Email <-. "service provider" .-> Google 
   Email -.-> Facebook
   Email -.-> Discord
   Email -.-> LinkedIn
@@ -79,26 +89,38 @@ subgraph Social_IDs["Social Identifiers"]
   NationalID -.-> KYC
   DriversLicense -.-> KYC
   Face -.-> KYC
+  Face -.-> Kleros
 
   KYC -.-> Synaps
   KYC -.-> zkKYC
 
-  Google -.-> zkLogin
+  Social --> zkLogin
+
+  Mnemonic --> CoinbaseWallet
+  Mnemonic --> MetaMask
+  Mnemonic --> TrustWallet
 
   zkLogin --> Wallet_Address
+
   CoinbaseWallet --> Wallet_Address
+
   MetaMask --> Wallet_Address
+
   TrustWallet --> Wallet_Address
+
   Web3Auth --> Wallet_Address
+  
   Magic --> Wallet_Address
 
   Wallet_Address --> ENS
 
-  Iris --> WORLD
+  Iris --> World
+
+  World --> WorldApp
 
   Social -->Web3Auth
 
-  Facebook & Reddit & Discord & LinkedIn & GitHub --> Social
+  Facebook & Reddit & Discord & LinkedIn & GitHub & Google --> Social
 
-  CAPTCHA -.-> Civic
+  %% CAPTCHA -.-> Civic
   CAPTCHA -.-> Idena
