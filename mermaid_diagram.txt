@@ -1,0 +1,86 @@
+flowchart LR
+  %% ───────────────────────────── Keys / Wallets
+  subgraph W["Keys / Wallets"]
+    Magic["Magic.link<br>(e-mail / login wallet)"]
+    zkLogin["zkLogin<br>(Sui OAuth-ZK wallet)"]
+    Metamask["MetaMask<br>(Ethereum EOA)"]
+    Privy["Privy"]
+    Web3Auth["Web3Auth"]
+
+  end
+
+  %% ───────────────────────────── 2. Identifier (DID / Name)
+  subgraph I["Social (Web3) Identifiers"]
+    ENS["ENS name<br>(alice.eth)"]
+  end
+
+  subgraph Gov_IDs["Government Identifiers"]
+    Passport["Passport"]
+    ID["National ID"]
+    DriversLicense["Driver's License"]
+  end
+
+%% ───────────────────────────── Social Identifiers
+  subgraph Social_IDs["Social Identifiers"]
+    Phone["Phone #"]
+    Email["Email"]
+  end
+
+  %% ───────────────────────────── Web2 Identifiers
+  subgraph Web2_IDs["Web2 Identifiers"]
+    GitHub["GitHub"]
+    LinkedIn["LinkedIn"]
+    Discord["Discord"]
+    Google["Google"]
+    Facebook["Facebook"]
+    Reddit["Reddit"]
+    Binance["Binance"]
+    Guild["Guild"]
+    Lens["Lens"]
+  end
+
+  %% ───────────────────────────── 3. Credentials (facts about the ID)
+  subgraph C["Credentials (verifiable claims)"]
+    PRIVADO["Privado ID"]
+    INDY["Indy / Aries"]
+    IDENA["Idena"]
+    CIVIC["Civic Pass<br>(KYC NFT)"]
+    BRIGHT["BrightID<br>(unique-human)"]
+    WORLD["World ID<br>(biometric)"]
+    Billions["Billions Network<br>(passport)"]
+    zkKYC["zkKYC"]
+    %% Ontology["Ontology"]
+
+    Synaps["Synaps<br>(KYC)"]
+
+  end
+
+
+
+  %% ───────────────────────────── Reputation
+  subgraph KYC_Service["Know Your Customer"]
+    KYC["KYC"]
+  end
+
+  %% ───────────────────────────── Reputation
+  subgraph R["Reputation-based Anti-Sybil"]
+    GitcoinPassport["Human.tech / Gitcoin Passport<br>(reputation score)"]
+  end
+
+  %% ─────────── Flows
+  Metamask --> ENS
+  Web3Auth -. "uses" .-> Google & Facebook & Reddit & Discord
+  
+
+  zkLogin -. "uses" .-> Google
+  PRIVADO & CIVIC & BRIGHT & IDENA -. "connects to" .-> GitcoinPassport
+
+  GitHub & LinkedIn & Discord & Google & Binance & Guild -. "connects to" .-> GitcoinPassport
+
+  Email -. "is needed for" .-> Binance
+
+  Passport & ID & DriversLicense -. "required for" .-> KYC
+
+  Email -. "connects to" .-> Magic
+  
+
