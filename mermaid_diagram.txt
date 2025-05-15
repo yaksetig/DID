@@ -1,5 +1,9 @@
-flowchart TD
+flowchart LR
   %% ─────── Subgraphs ───────
+    subgraph Residence["Additional Attributes"]
+    Address["Address"]
+  end
+
   subgraph KYC_Service["Know Your Customer"]
     KYC(("KYC"))
   end
@@ -8,11 +12,17 @@ flowchart TD
     CAPTCHA["CAPTCHA<br>(e.g., reCAPTCHA)"]
   end
 
+  subgraph Reputation_Systems["Reputation Systems"]
+    BrightID["BrightID"]
+    GitcoinPassport["Gitcoin Passport"]
+  end
+
   subgraph PoH["Proof of Humanity"]
     World["World ID<br>(biometric)"]
     Billions["Billions Network<br>(passport)"]
     Kleros["Proof-of-Humanity"]
-    CIVIC["Civic Pass"]
+    CIVIC_CAPTCHA["Civic Pass<br>(CAPTCHA)"]
+    CIVIC_LIVENESS["Civic Pass<br>(Liveness)"]
     Idena["Idena"]
   end
 
@@ -41,7 +51,7 @@ subgraph Social_IDs["Social Identifiers"]
   end
 
   subgraph Web2_IDs["Web2 Identifiers"]
-    Reddit["Reddit"]
+    %% Reddit["Reddit"]
     Discord["Discord"]
     LinkedIn["LinkedIn"]
     GitHub["GitHub"]
@@ -51,9 +61,10 @@ subgraph Social_IDs["Social Identifiers"]
 
   subgraph Web3_IDs["Web3 Identifiers"]
     ENS["ENS name<br>(alice.eth)"]
-    Wallet_Address(("Wallet Address"))
     Lens["Lens"]
+    Farcaster["Farcaster"]
     Guild["Guild"]
+    Wallet_Address((("Wallet Address")))
   end
 
   subgraph Gov_IDs["Government Identifiers"]
@@ -62,10 +73,11 @@ subgraph Social_IDs["Social Identifiers"]
     DriversLicense["Driver’s License"]
   end
 
+
   subgraph Bio_IDs["Biometric Identifiers"]
-    Fingerprints["Fingers<br>(Touch ID)"]
     Face["Face<br>(Face ID)"]
     Iris["Eyes<br>(Iris Codes)"]
+    Fingerprints["Fingers<br>(Touch ID)"]
   end
 
   subgraph Wallet_Providers["Wallet Providers"]
@@ -74,53 +86,67 @@ subgraph Social_IDs["Social Identifiers"]
     TrustWallet["Trust Wallet"]
   end
 
-  Social(("Social Apps<br>(username & password)"))
+    VCs(("Verifiable Credentials"))
+
+    Social(("Social Apps<br>(username & password)"))
 
   %% ─────── Relationships ───────
-  Email <-. "service provider" .-> Google 
-  Email -.-> Facebook
-  Email -.-> Discord
-  Email -.-> LinkedIn
-  Email -.-> GitHub
-  Email -.-> Reddit
-  Email --> Magic
+    Email <-. "service provider" .-> Google 
+    Email -.-> Facebook
+    Email -.-> Discord
+    Email -.-> LinkedIn
+    Email -.-> GitHub
+    Email --> Magic
 
-  Passport -.-> KYC
-  NationalID -.-> KYC
-  DriversLicense -.-> KYC
-  Face -.-> KYC
-  Face -.-> Kleros
+    Address -.-> KYC
+    Passport -.-> KYC
+    NationalID -.-> KYC
+    DriversLicense -.-> KYC
+    Face -.-> KYC
+    Face -.-> Kleros
+    Face -.-> CIVIC_LIVENESS
 
-  KYC -.-> Synaps
-  KYC -.-> zkKYC
+    KYC -.-> Synaps
+    KYC -.-> zkKYC
 
-  Social --> zkLogin
+    Social --> zkLogin
 
-  Mnemonic --> CoinbaseWallet
-  Mnemonic --> MetaMask
-  Mnemonic --> TrustWallet
+    Mnemonic --> CoinbaseWallet
+    Mnemonic --> MetaMask
+    Mnemonic --> TrustWallet
 
-  zkLogin --> Wallet_Address
+    zkLogin --> Wallet_Address
 
-  CoinbaseWallet --> Wallet_Address
+    CoinbaseWallet --> Wallet_Address
 
-  MetaMask --> Wallet_Address
+    MetaMask --> Wallet_Address
 
-  TrustWallet --> Wallet_Address
+    TrustWallet --> Wallet_Address
 
-  Web3Auth --> Wallet_Address
-  
-  Magic --> Wallet_Address
+    Web3Auth --> Wallet_Address
 
-  Wallet_Address --> ENS
+    Magic --> Wallet_Address
 
-  Iris --> World
+    VCs --> Wallet_Address
 
-  World --> WorldApp
+    Wallet_Address --> ENS
 
-  Social -->Web3Auth
+    Iris --> World
 
-  Facebook & Reddit & Discord & LinkedIn & GitHub & Google --> Social
+    World --> WorldApp
+    World --> VCs
 
-  %% CAPTCHA -.-> Civic
-  CAPTCHA -.-> Idena
+    WorldApp --> Wallet_Address
+
+    Social -->Web3Auth
+    Social --> GitcoinPassport
+
+    Lens --> GitcoinPassport
+
+    CIVIC_CAPTCHA --> VCs
+    CIVIC_LIVENESS --> VCs
+
+    Facebook & Discord & LinkedIn & GitHub & Google --> Social
+
+    CAPTCHA -.-> Idena
+    CAPTCHA -.-> CIVIC_CAPTCHA
