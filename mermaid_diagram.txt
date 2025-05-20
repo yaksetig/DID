@@ -1,152 +1,205 @@
+---
+config:
+  theme: mc
+  layout: elk
+---
 flowchart LR
-  %% ─────── Subgraphs ───────
-    subgraph Residence["Additional Attributes"]
-    Address["Address"]
+ subgraph CEX["Centralized Exchanges"]
+        Coinbase["Coinbase"]
+        Binance["Binance"]
   end
-
-  subgraph KYC_Service["Know Your Customer"]
-    KYC(("KYC"))
+ subgraph DEX["Decentralized Exchanges"]
+        Uniswap["Uniswap"]
   end
-
-  subgraph PoH_Tests["Proof-of-Humanity Tests"]
-    CAPTCHA["CAPTCHA<br>(e.g., reCAPTCHA)"]
+ subgraph Authentication_Knows["Something you Know"]
+        PIN["PIN"]
+        Password["Password"]
   end
-
-  subgraph Reputation_Systems["Reputation Systems"]
-    BrightID["BrightID"]
-    GitcoinPassport["Gitcoin Passport"]
+ subgraph Authentication_Have["Something you Have"]
+        MFA["2FA"]
   end
-
-  subgraph PoH["Proof of Humanity"]
-    World["World ID<br>(biometric)"]
-    Billions["Billions Network<br>(passport)"]
-    Kleros["Proof-of-Humanity"]
-    CIVIC_CAPTCHA["Civic Pass<br>(CAPTCHA)"]
-    CIVIC_LIVENESS["Civic Pass<br>(Liveness)"]
-    Idena["Idena"]
+ subgraph Authentication_Are["Something you Are"]
+        Face["Face<br>(e.g., Face ID)"]
+        Iris["Eyes<br>(e.g., Iris Codes)"]
+        Fingerprints["Fingers<br>(e.g., Touch ID)"]
   end
-
-  subgraph KYC_Providers["KYC Providers"]
-    zkKYC["zkKYC"]
-    Synaps["Synaps<br>(KYC)"]
-    CivicKYC["Civic<br(KYC)"]
+ subgraph Authentication["**Authentication**"]
+        Authentication_Knows
+        Authentication_Have
+        Authentication_Are
   end
+ subgraph Attestations["Attestations"]
 
-   subgraph DID_Ecosystems["DID Ecosystems"]
-    OntoApp["Onto App"]
-    WorldApp["World App"]
-    PrivadoID["PrivadoID"]
+ subgraph TrustedAttestations["Trusted Attestations"]
+        Electricity["Electricity Company"]
+        Gas["Gas Company"]
+        Water["Water Company"]
+        Bank["Bank"]
   end
-
-  subgraph Key_Generation["Key Generation"]
-    Mnemonic["Mnemonic<br>(12/24 words)"]
-    Magic["Magic.link<br>(email / login wallet)"]
-    zkLogin["zkLogin<br>(Sui OAuth-ZK wallet)"]
-    Web3Auth["Web3Auth"]
+ subgraph SoftAttestations["'Soft' Attestations"]
+        PhoneCompany["Phone Company"]
   end
-
-subgraph Social_IDs["Social Identifiers"]
-    Email["Email"]
-    Phone["Phone #"]
+  subgraph AdditionalAttestations["Additional Attestations"]
+        Zeronym["Zeronym"]
+        Twilio["Twilio"]
   end
-
-  subgraph Web2_IDs["Web2 Identifiers"]
-    %% Reddit["Reddit"]
-    Discord["Discord"]
-    LinkedIn["LinkedIn"]
-    GitHub["GitHub"]
-    Google["Gmail"]
-    Facebook["Facebook"]
+end
+ subgraph KYC_Service["Know Your Customer"]
+        KYC[\"KYC"\]
   end
-
-  subgraph Web3_IDs["Web3 Identifiers"]
-    ENS["ENS name<br>(alice.eth)"]
-    Lens["Lens"]
-    Farcaster["Farcaster"]
-    Guild["Guild"]
-    Wallet_Address((("Wallet Address")))
+ subgraph PoH_Tests["Proof-of-Humanity Tests"]
+        CAPTCHA["**CAPTCHAs**<br>(e.g., reCAPTCHA)"]
   end
-
-  subgraph Gov_IDs["Government Identifiers"]
-    Passport["Passport"]
-    NationalID["National ID"]
-    DriversLicense["Driver’s License"]
+ subgraph Reputation_Systems["Reputation Systems"]
+        BrightID["BrightID"]
+        GitcoinPassport[\"Gitcoin Passport"\]
   end
-
-
-  subgraph Bio_IDs["Biometric Identifiers"]
-    Face["Face<br>(Face ID)"]
-    Iris["Eyes<br>(Iris Codes)"]
-    Fingerprints["Fingers<br>(Touch ID)"]
+ subgraph PoH["Proof of Humanity"]
+        World["World ID"]
+        Billions["Billions Network"]
+        Kleros["Proof-of-Humanity"]
+        CIVIC["Civic"]
+        Idena["Idena"]
   end
-
-  subgraph Wallet_Providers["Wallet Providers"]
-    CoinbaseWallet["Coinbase Smart Wallet"]
-    MetaMask["MetaMask"]
-    TrustWallet["Trust Wallet"]
+ subgraph KYC_Providers["KYC Providers"]
+        zkKYC["zkKYC"]
+        Synaps["Synaps<br>(KYC)"]
+        CIVIC_KYC["Civic"]
   end
-
-    VCs(("Verifiable Credentials"))
-
-    Social(("Social Apps<br>(username & password)"))
-
-  %% ─────── Relationships ───────
-    Email <-. "service provider" .-> Google 
-    Email -.-> Facebook
-    Email -.-> Discord
-    Email -.-> LinkedIn
-    Email -.-> GitHub
-    Email --> Magic
-
-    Address -.-> KYC
-    Passport -.-> KYC
-    NationalID -.-> KYC
-    DriversLicense -.-> KYC
-    Face -.-> KYC
-    Face -.-> Kleros
-    Face -.-> CIVIC_LIVENESS
-
-    KYC -.-> Synaps
-    KYC -.-> zkKYC
-
-    Social --> zkLogin
-
-    Mnemonic --> CoinbaseWallet
-    Mnemonic --> MetaMask
-    Mnemonic --> TrustWallet
-
+ subgraph DID_Ecosystems["DID Ecosystems"]
+        OntoApp["Onto App"]
+        WorldApp["World App"]
+        PrivadoID["PrivadoID"]
+  end
+ subgraph Key_Generation["Key Generation"]
+        Mnemonic["Mnemonic<br>(12/24 words)"]
+        Magic["Magic.link<br>(email / login wallet)"]
+        zkLogin["zkLogin<br>(Sui OAuth-ZK wallet)"]
+        Web3Auth["Web3Auth"]
+        CIVIC_Auth["Civic Auth"]
+  end
+ subgraph OAuth2_IDs["OAuth2 Identifiers"]
+        Discord["Discord"]
+        LinkedIn["LinkedIn"]
+        GitHub["GitHub"]
+        Google["Gmail"]
+        Facebook["Facebook"]
+        X["Twitter / X"]
+        WeChat["WeChat"]
+        Twitch["Twitch"]
+        Line["Line"]
+        Apple["Apple ID"]
+        Reddit["Reddit"]
+  end
+ subgraph Other_Web2_IDs["Other Identifiers"]
+        Telegram["Telegram"]
+        Snapchat["Snapchat"]
+        TikTok["TikTok"]
+  end
+ subgraph Web2_Payment_IDs["Payment Identifiers"]
+        Venmo["Venmo"]
+        Paypal["Paypal"]
+        Zelle["Zelle"]
+        Wise["Wise"]
+        Revolut["Revolut"]
+        CashApp["Cash App"]
+  end
+ subgraph Web2_IDs["Web2 Identifiers"]
+        OAuth2_IDs
+        Other_Web2_IDs
+        Web2_Payment_IDs
+  end
+ subgraph Gov_IDs["Government Identifiers"]
+        Passport["Passport"]
+        NationalID["National ID"]
+        DriversLicense["Driver’s License"]
+  end
+ subgraph Social_IDs["Social Identifiers"]
+        Email["Email"]
+        Phone["Phone #"]
+        Username["Username<br>"]
+  end
+ subgraph Residence["Additional Attributes"]
+        Address["Address"]
+        Name["Name"]
+        DOB["Date of Birth"]
+  end
+ subgraph Master_IDs["**Identifiers**"]
+        Gov_IDs
+        Social_IDs
+        Residence
+  end
+ subgraph Wallet_Providers["Wallet Providers"]
+        CB_Wallet["Coinbase Smart Wallet"]
+        MetaMask["MetaMask"]
+        TrustWallet["Trust Wallet"]
+  end
+ subgraph Web3_IDs["Web3 Identifiers"]
+        ENS["ENS name<br>(alice.eth)"]
+        Lens["Lens"]
+        Farcaster["Farcaster"]
+        Guild["Guild"]
+        Snapshot["Snapshot"]
+        Wallet_Address((("Wallet Address")))
+  end
+    Apple -.-> X & Reddit
+    Google -.-> X & LinkedIn & Reddit
+    Passport -. attests to .-> Name
+    DriversLicense -. attests to .-> Name & Address
+    Email <== service provider ==> Google & Apple
+    Email -. is needed for .-> Facebook & Discord & LinkedIn & GitHub & X & Twitch
+    Email --> Magic & Web3Auth
+    Farcaster -. can be used as login for .-> Web3Auth
+    Phone -. is needed for .-> WeChat & Line
+    Phone -. can be used to register on .-> Reddit
+    Phone -. identifier on .-> Zelle & Venmo & Revolut & Wise
+    Address -. needed for .-> KYC
+    Passport --> KYC & Billions
+    NationalID -. used for .-> KYC
+    DriversLicense --> KYC
+    Face --> KYC & Kleros & CIVIC
+    KYC -. is provided by .-> Synaps & zkKYC & CIVIC_KYC
+    KYC -. is required by .-> Binance & Coinbase
+    Social(("Social Apps<br>")) --> zkLogin & CIVIC_Auth & Web3Auth & GitcoinPassport
+    Mnemonic --> CB_Wallet & MetaMask & TrustWallet
     zkLogin --> Wallet_Address
-
-    CoinbaseWallet --> Wallet_Address
-
+    CB_Wallet --> Wallet_Address
     MetaMask --> Wallet_Address
-
     TrustWallet --> Wallet_Address
-
     Web3Auth --> Wallet_Address
-
+    CIVIC_Auth --> Wallet_Address
     Magic --> Wallet_Address
-
-    VCs --> Wallet_Address
-
-    Wallet_Address --> ENS
-
-    Iris --> World
-
-    World --> WorldApp
-    World --> VCs
-
+    VCs(("**Verifiable Credential(s)**")) -. is associated with .-> Wallet_Address
     WorldApp --> Wallet_Address
-
-    Social -->Web3Auth
-    Social --> GitcoinPassport
-
+    Wallet_Address --> ENS
+    Wallet_Address -.is an identifier on.-> Uniswap
+    Iris --> World
+    World -. is used by .-> WorldApp
+    World -. is a .-> VCs
+    CIVIC_KYC --> VCs
+    CIVIC -. issues .-> VCs
+    GitHub --> Social & GitcoinPassport
+    Google --> Social & GitcoinPassport
+    LinkedIn --> Social & GitcoinPassport
+    Discord --> Social & GitcoinPassport
+    Twitch --> Social
+    Facebook --> Social
+    X --> Social
     Lens --> GitcoinPassport
+    ENS --> GitcoinPassport
+    Snapshot --> GitcoinPassport
+    Guild --> GitcoinPassport
+    BrightID --> GitcoinPassport
+    Binance --> GitcoinPassport
+    Idena --> GitcoinPassport
+    Electricity -. attests to .-> Address
+    Gas -. attests to .-> Address
+    Water -. attests to .-> Address
+    Bank -. attests to .-> Address
+    Zeronym -. attests to .-> Phone
+    Zeronym --> GitcoinPassport
+    Twilio -. attests to .-> Phone
+    CAPTCHA -.-> Idena & CIVIC
+    DOB -. required for .-> Facebook & X
+    
 
-    CIVIC_CAPTCHA --> VCs
-    CIVIC_LIVENESS --> VCs
-
-    Facebook & Discord & LinkedIn & GitHub & Google --> Social
-
-    CAPTCHA -.-> Idena
-    CAPTCHA -.-> CIVIC_CAPTCHA
