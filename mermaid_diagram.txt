@@ -11,14 +11,14 @@ flowchart LR
  subgraph DEX["Decentralized Exchanges"]
         Uniswap["Uniswap"]
   end
- subgraph Authentication_Knows["Something you Know"]
+ subgraph Authentication_Knows["Something you know"]
         PIN["PIN"]
         Password["Password"]
   end
- subgraph Authentication_Have["Something you Have"]
+ subgraph Authentication_Have["Something you have"]
         MFA["2FA"]
   end
- subgraph Authentication_Are["Something you Are"]
+ subgraph Authentication_Are["Something you are"]
         Face["Face<br>(e.g., Face ID)"]
         Iris["Eyes<br>(e.g., Iris Codes)"]
         Fingerprints["Fingers<br>(e.g., Touch ID)"]
@@ -202,4 +202,3 @@ end
     CAPTCHA -.-> Idena & CIVIC
     DOB -. required for .-> Facebook & X
     
-
